@@ -1,0 +1,33 @@
+Router(config)#interface GigabitEthernet0/0/0
+Router(config-if)#no shutdown
+Router(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/0, changed state to up
+ip address 10.0.0.1 255.0.0.0
+Router(config-if)#ip address 10.0.0.1 255.255.255.0
+Router(config-if)#ip address 10.0.0.1 255.255.255.0
+Router(config-if)#
+Router(config-if)#exit
+Router(config)#interface GigabitEthernet0/0/1
+Router(config-if)#no shutdown
+Router(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0/1, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/1, changed state to up
+ip address 202.113.25.1 255.255.255.0
+Router(config-if)#ip address 202.113.25.1 255.255.255.0
+Router(config-if)#ip address 202.113.25.1 255.255.255.0
+Router(config-if)#exit
+Router(config)#interface GigabitEthernet0/0/1
+Router(config-if)#ip nat inside
+Router(cinterface GigabitEthernet0/0/1interface GigabitEthernet0/0/0
+Routeip nat insideip nat inside
+Router(cinterface GigabitEthernet0/0/1interface GigabitEthernet0/0/1
+Routeip nat insideip nat outside
+Router(config-if)#exit
+Router(config)#access-list 10 permit 10.0.0.0 0.0.0.255
+Router(config)#iip nat pool todd 202.113.25.1 202.113.25.3 netmask 255.255.255.0
+Router(config)#ip nat inside source list 10 pool todd overload
+Router(config)#ip nat inside source static tcp 10.0.0.2 80 202.113.25.2 80
+Router(config)#
